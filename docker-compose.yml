@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  coturn:
+    image: instrumentisto/coturn:latest
+    container_name: coturn
+    restart: unless-stopped
+    ports:
+      - '${LISTENING_PORT}:${LISTENING_PORT}'
+      - '${MIN_PORT}-${MAX_PORT}:${MIN_PORT}-${MAX_PORT}/udp'
+    command:
+      - '--realm=${SUBDOMAIN}.${DOMAIN}'
+      - '--server-name=turn-server'
+      - '--fingerprint'
+      - '--listening-ip=0.0.0.0'
+      - '--external-ip=${EXTERNAL_IP}'
+      - '--listening-port=${LISTENING_PORT}'
+      - '--min-port=${MIN_PORT}'
+      - '--max-port=${MAX_PORT}'
+      - '--log-file=/var/log/turnserver.log'
+      - '--tls-listening-port=443'
+      - '--use-auth-secret'
+      - '--static-auth-secret=${STATIC_AUTH_SECRET}'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.turn-server.tls=true'
+      - 'traefik.http.routers.turn-server.rule=Host(`${SUBDOMAIN}.${DOMAIN}`)'
+      - 'traefik.http.routers.turn-server.entrypoints=websecure'
+      - 'traefik.http.routers.turn-server.tls.certresolver=letsencrypt'
+    networks:
+      - 'web'
+
+networks:
+  web:
+    external: true
