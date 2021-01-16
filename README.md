@@ -53,10 +53,10 @@ Make sure you have the App `Nextcloud Talk` installed on your Nextcloud instance
 
 Full documentation available [here](https://nextcloud-talk.readthedocs.io/en/latest/TURN/)  
 
-> Go to Nextcloud admin panel > Talk settings. Btw. if you already have your own TURN server, you can and may want to use it as STUN server as well:
-> STUN servers: your.domain.org:
-> TURN server: your.domain.org:
-> TURN secret:
-> Protocol: UDP and TCP
-> Do not add http(s):// or turn(s):// protocol prefix here, just enter the bare domain:port. Nextcloud Talk adds the required turn:// protocol internally to the request.
+> Go to Nextcloud admin panel > Talk settings. Btw. if you already have your own TURN server, you can and may want to use it as STUN server as well:  
+> STUN servers: your.domain.org:  
+> TURN server: your.domain.org:  
+> TURN secret:  
+> Protocol: UDP and TCP  
+> Do not add http(s):// or turn(s):// protocol prefix here, just enter the bare domain:port. Nextcloud Talk adds the required turn:// protocol internally to the request.  
 
